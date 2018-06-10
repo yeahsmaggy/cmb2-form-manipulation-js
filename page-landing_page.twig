@@ -1,0 +1,106 @@
+{% extends "base.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="page">
+			
+			{% if post._cmb_page_intro_area_text != null %}
+				<div class="row">
+
+
+				<div class="col-sm-12">	{{post._cmb_page_intro_area_text}}</div>
+
+
+				</div>
+			{% endif %}
+			
+			{% if post._cmb_page_intro_area_checkbox == 'on' %}
+				<div class="row jump-to-list">
+					{% for contentblock in post._cmb_page_content_blocks_group %}
+						
+						{% set foo = contentblock.cmb_group_item_select %}
+						
+						{% if foo == 'modalwindow' %}
+							
+						{% elseif foo == 'pattern1' %}
+							
+							{% if contentblock._cmb_page_pattern_title_checkbox != 'on' %}
+								<div class="cta--jump-to"><a href="#" data-anchor="{{  contentblock._cmb_page_pattern1_text|only_alpha_underscores  }}">{{contentblock._cmb_page_pattern1_text|capitalize}}</a></div>
+							{% endif %}
+						{% elseif foo == 'pattern2' %}
+							
+							{% if contentblock._cmb_page_pattern_title_checkbox != 'on' %}
+								<div class="cta--jump-to"><a href="#" data-anchor="{{  contentblock._cmb_page_pattern2_text|only_alpha_underscores }}">{{contentblock._cmb_page_pattern2_text|capitalize}}</a></div>
+							{% endif %}
+							
+						{% elseif foo == 'pattern3a' %}
+							
+							{% if contentblock._cmb_page_pattern_title_checkbox != 'on' %}
+								<div class="cta--jump-to"><a href="#" data-anchor="{{  contentblock._cmb_page_pattern3a_text|only_alpha_underscores }}">{{contentblock._cmb_page_pattern3a_text|capitalize}}</a></div>
+							{% endif %}
+						{% elseif foo == 'pattern3b'  %}
+							{% if contentblock._cmb_page_pattern_title_checkbox != 'on' %}
+								<div class="cta--jump-to"><a href="#" data-anchor="{{  contentblock._cmb_page_pattern3b_text|only_alpha_underscores  }}">{{contentblock._cmb_page_pattern3b_text|capitalize}}</a></div>
+							{% endif %}
+							
+						{% endif %}
+						
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% for contentblock in post._cmb_page_content_blocks_group %}
+				
+				{% if contentblock.cmb_group_item_select == 'modalwindow' %}
+					{% include 'patterns/twiglet-modalwindow.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'pattern1' %}
+					{% include 'patterns/twiglet-pattern1.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'pattern2' %}
+					{% include 'patterns/twiglet-pattern2.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'pattern3a' %}
+					{% include 'patterns/twiglet-pattern3a.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'pattern3b' %}
+					{% include 'patterns/twiglet-pattern3b.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'customcontentblock' %}
+					{% include 'patterns/twiglet-customcontentblock.twig' %}
+				{% endif %}
+				{% if contentblock.cmb_group_item_select == 'customcontentblock' %}
+					{% include 'patterns/twiglet-customcontentblock.twig' %}
+				{% endif %}
+			{% endfor %}
+			
+			<div class="row">
+				
+
+				{% if post._cmb_page_file_links_group != null %}
+					
+
+					{% for file in post._cmb_page_file_links_group %}
+						
+					
+						<div class="pattern-1__cta pull-right">
+							<a href="{{file._cmb_page_file_links_group_link}}">{{file._cmb_page_file_links_group_text}}</a>
+						</div>
+
+					{% endfor %}
+
+				{% endif %}
+
+
+			</div>
+				
+				<div class="row">
+					
+					{% set next = TimberPost(post._cmb_page_read_next_link) %}
+					{% if post._cmb_page_read_next_link != null %}
+						<a href="{{next.permalink}}" class="read-next-cta">
+							<h2 class="page-title--next">Read next</h2>
+							<h1 class="page-title page-title--next--title">{{next.post_title}}</h1>
+							<!--a.page-next(href="#")--></a>
+						{% endif %}</div>
+					</div>
+				</div>
+			{% endblock %}
